@@ -43,3 +43,16 @@ While the command line tool is awesome, for this course we are going to focus on
 To begin, click on the Dashboard tab on your screen. This will open the web console on your browser.
 
 You should see an OKD window with Username and Password forms as shown below:
+
+![img](https://github.com/Bes0n/openshift4learning/blob/master/images/img1.png)
+
+For this scenario, log in by entering the following:
+  
+Username: **developer**
+  
+Password: **developer**
+  
+After logging in to the web console, you'll see a blue button labeled Create Project in the top right corner of your screen that is shown below. Click this button to get started.
+
+![img](https://github.com/Bes0n/openshift4learning/blob/master/images/img2.png)
+
