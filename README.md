@@ -2,6 +2,9 @@
 Taken notes during learning OpenShift on https://learn.openshift.com
 
 - [Getting Started with OpenShift for Developers](#getting-started-with-openshift-for-developers)
+- [Logging in to an OpenShift Cluster](#logging-in-to-an-openshift-cluster)
+- [Deploying Applications From Images](#deploying-applications-from-images)
+
 
 ## Getting Started with OpenShift for Developers
 ### Step 1 - Exploring The Command Line
@@ -167,3 +170,53 @@ You can always click on the Route name in this list to modify an existing Route.
 Now that we know how to create a Route, let's verify that the application is really available at the URL shown in the web console. Click the link and you will see:
 
 ![img](https://github.com/Bes0n/openshift4learning/blob/master/images/img15.png)
+
+
+## Logging in to an OpenShift Cluster
+
+In this course you learnt about how to log into an OpenShift cluster, as well as how you can add other users as collaborators to you project.
+
+You can find a summary of the key commands covered below, along with some related commands. To see more information on each oc command, run it with the --help option.
+
+- ```oc login``` - Log in to your OpenShift cluster and save the session token for subsequent use. You will be prompted for the user name and password or directed to a web console page where you can obtain a token you must then use to use to login from the command line. The web page will require you to first login in to the web console if you are not already logged in.
+
+- ```oc login <server>``` - Log in to a specific OpenShift cluster. You will need to specify the name of the server as argument the first time you are using it, or if switching back to it after having used a different cluster.
+
+- ```oc login --username <user>``` - Log in to your OpenShift cluster as a specific user.
+
+- ```oc login --username <username> --password <password>``` - Log in to your OpenShift cluster as a specific user and supply the password on the command line. Note that this is not recommended for real systems as your password may be logged or retained in command history.
+
+- ```oc login --token <token>``` - Log in to your server using a token for an existing session.
+
+- ```oc logout``` - Log out of the active session by clearing the session token.
+
+- ```oc whoami``` - Show the name of the user for the current login session.
+
+- ```oc whoami --token``` - Show the token for the current login session.
+
+- ```oc whoami --show-server``` - Show which OpenShift cluster you are logged into.
+
+- ```oc whoami --show-context``` - Shows the context for the current session. This will include details about the project, server and name of user, in that order.
+
+- ```oc config get-clusters``` - Show a list of all OpenShift clusters ever logged in to.
+
+- ```oc config get-contexts``` - Show a list of contexts for all sessions ever created. For each context listed, this will include details about the project, server and name of user, in that order.
+
+- ```oc adm policy add-role-to-user edit <username> -n <project>``` - Add another user to a project so that they can work within the project, including creating new deployments or deleting applications.
+
+- ```oc adm policy add-role-to-user view <username> -n <project>``` -  Add another user to a project but such that they can only view what is in the project.
+
+- ```oc adm policy add-role-to-user admin <username> -n <project>``` - Add another user to a project such that they are effectively a joint owner of the project and have administration rights over it, including the ability to delete the project.
+
+
+## Deploying Applications From Images
+
+In this course you learnt about deploying an existing Docker-formatted container image to OpenShift. You first deployed an image direct from an external image registry. This was followed by importing an image into the OpenShift internal registry, and then deploying the image from the internal registry.
+
+You can find a summary of the key commands covered below. To see more information on each oc command, run it with the --help option.
+
+- ```oc new-app <docker-image> --name <name>``` - Deploy an application from a Docker-formatted image found on an external image registry. If there is any ambiguity as to the source of the image, use the --docker-image option.
+
+- ```oc new-app <image-stream> --name <name>``` - Deploy an application from a Docker-formatted image found in the internal image registry. If there is any ambiguity as to the source of the image, use the --image-stream option.
+
+- ```oc import-image <docker-image> --confirm``` - Import a Docker-formatted image found on an external image registry, causing it to be pulled into the internal image registry.
