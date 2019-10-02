@@ -230,18 +230,18 @@ The web application you deployed was implemented using the Python programming la
 
 You can find a summary of the key commands covered below. To see more information on each oc command, run it with the --help option.
 
-oc new-app <image:tag>~<source-code> --name <name>: Deploy an application from source code hosted on a Git repository using the specified S2I builder image.
+- ```oc new-app <image:tag>~<source-code> --name <name>``` - Deploy an application from source code hosted on a Git repository using the specified S2I builder image.
 
-oc start-build <name>: Trigger a new build and deployment of the application where source code is taken from the hosted Git repository specified to oc new-app when the build configuration was created.
+- ```oc start-build <name>``` - Trigger a new build and deployment of the application where source code is taken from the hosted Git repository specified to oc new-app when the build configuration was created.
 
-oc start-build <name> --from-dir=.: Trigger a new build and deployment of the application where source code is taken from the current working directory of the local machine where the oc command is being run.
+- ```oc start-build <name> --from-dir=.``` - Trigger a new build and deployment of the application where source code is taken from the current working directory of the local machine where the oc command is being run.
 
-oc cancel-build <build>: Cancel a running build.
+- ```oc cancel-build <build>``` - Cancel a running build.
 
-oc logs bc/<name> --follow: Monitor the log output from the current build for the application.
+- ```oc logs bc/<name> --follow``` - Monitor the log output from the current build for the application.
 
-oc get builds: Display a list of all builds, completed, cancelled and running.
+- ```oc get builds``` - Display a list of all builds, completed, cancelled and running.
 
-oc get builds --watch: Monitor the progress of any active builds.
+- ```oc get builds --watch``` - Monitor the progress of any active builds.
 
-oc get pods --watch: Monitor any activity related to pods in the project. This will include pods run to handle building and deployment of an application.
+- ```oc get pods --watch``` - Monitor any activity related to pods in the project. This will include pods run to handle building and deployment of an application.
