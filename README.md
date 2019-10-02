@@ -1,11 +1,12 @@
 # openshift4learning
 Taken notes during learning OpenShift on https://learn.openshift.com
+- [Foundations of OpenShift](#foundations-of-openShift)
+    - [Getting Started with OpenShift for Developers](#getting-started-with-openshift-for-developers)
+    - [Logging in to an OpenShift Cluster](#logging-in-to-an-openshift-cluster)
+    - [Deploying Applications From Images](#deploying-applications-from-images)
+    - [Deploying Applications From Source](#deploying-applications-from-source)
 
-- [Getting Started with OpenShift for Developers](#getting-started-with-openshift-for-developers)
-- [Logging in to an OpenShift Cluster](#logging-in-to-an-openshift-cluster)
-- [Deploying Applications From Images](#deploying-applications-from-images)
-- [Deploying Applications From Source](#deploying-applications-from-source)
-
+## Foundations of OpenShift
 ## Getting Started with OpenShift for Developers
 ### Step 1 - Exploring The Command Line
 The OpenShift CLI is accessed using the command oc. From here, you can administrate the entire OpenShift cluster and deploy new applications.
