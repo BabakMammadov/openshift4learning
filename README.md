@@ -5,6 +5,9 @@ Taken notes during learning OpenShift on https://learn.openshift.com
     - [Logging in to an OpenShift Cluster](#logging-in-to-an-openshift-cluster)
     - [Deploying Applications From Images](#deploying-applications-from-images)
     - [Deploying Applications From Source](#deploying-applications-from-source)
+    - [Using the CLI to Manage Resource Objects](#using-the-cli-to-manage-resource-objects)
+    - [Connecting to a Database Using Port Forwarding](#connecting-to-a-database-using-port-forwarding)
+    - [Transferring Files in and out of Containers](#transferring-files-in-and-out-of-containers)
 
 ## Foundations of OpenShift
 ## Getting Started with OpenShift for Developers
@@ -246,3 +249,95 @@ You can find a summary of the key commands covered below. To see more informatio
 - ```oc get builds --watch``` - Monitor the progress of any active builds.
 
 - ```oc get pods --watch``` - Monitor any activity related to pods in the project. This will include pods run to handle building and deployment of an application.
+
+## Using the CLI to Manage Resource Objects
+
+In this course you learnt about oc commands you would use for querying and updating the resource objects that OpenShift uses to track the state of the cluster.
+
+You can find a summary of the key commands covered below. To see more information on each oc command, run it with the --help option.
+
+- ```oc types```: Shows an introduction to core OpenShift concepts and types.
+
+- ```oc explain <setting-path>```: Shows a description of the purpose of a specific resource object type setting.
+
+- ```oc get```: Shows a list of all the resource object types you can make queries about.
+
+- ```oc get <type>```: Shows summary details of all resource objects of a specific type.
+
+- ```oc get <type> --selector app=<name>```: Shows summary details of all resource objects of a type with the specified label.
+
+- ```oc get <type/name>```: Show summary details of a resource object.
+
+- ```oc get <type/name> -o <json|yaml>```: Shows raw details of a resource object type as JSON or YAML.
+
+- ```oc get all```: Shows summary details of the key resource objects in a project. The list of resource object types matched by all includes buildconfigs, builds, imagestreams, deploymentconfigs, replicationcontrollers, routes, services and pods.
+
+- ```oc get all --selector app=<name>```: Shows summary details of the key resource objects in a project with the specified label.
+
+- ```oc describe <type/name>```: Shows human readable long form description of a resource object.
+
+- ```oc edit <type/name> -o <json|yaml>```: Edit the raw details of a resource object type as JSON or YAML.
+
+- ```oc export <type/name> -o <json|yaml>```: Shows raw details of a resource object type as JSON or YAML where any settings not required when creating a resource object have been removed.
+
+- ```oc create -f <definition.json>```: Create a resource object from a definition stored in a file. The format of the definition must be JSON or YAML. The metadata.name field of the definition must not correspond to an existing resource object.
+
+- ```oc replace -f <definition.json>```: Replace the definition of a resource object with that stored in a file. The format of the definition must be JSON or YAML. The metadata.name field of the definition must correspond to an existing resource object.
+
+- ```oc apply -f <definition.json>```: Replace the definition of a resource object if it exists with that stored in a file. The format of the definition must be JSON or YAML. The metadata.name field of the definition must correspond to an existing resource object. If the resource object does not already exist, it will be created.
+
+- ```oc patch <type/name> --patch <patch>```: Update a resource object using a patch specification.
+
+- ```oc label <type/name> <name=value>```: Add a label to a resource object.
+
+- ```oc label <type/name> <name->```: Remove a label from a resource object.
+
+- ```oc delete <type/name>```: Delete a resource object.
+
+- ```oc delete <type> --selector app=<name>```: Delete all resource objects of a type with the specified label.
+
+- ```oc delete <type> --all```: Delete all resource objects of a specific type.
+
+- ```oc delete all --all```: Delete all key resource objects in a project. The list of resource object types matched by all includes buildconfigs, builds, imagestreams, deploymentconfigs, replicationcontrollers, routes, services and pods.
+
+- ```oc delete all --selector app=<name>```: Delete all key resource objects in a project with the specified label.
+
+## Connecting to a Database Using Port Forwarding
+
+In this course you learnt about oc commands you would use for setting up a temporary connection between your local machine and a service running inside of OpenShift.
+
+You can find a summary of the key commands covered below. To see more information on each oc command, run it with the --help option.
+
+- ```oc rsh <pod-name>```: Start an interactive shell in the specified pod.
+
+- ```oc port-forward <pod-name> <local-port>:<remote-port>```: Forward connections between your local machine and an application running in OpenShift. The remote port is the port the application running in OpenShift accepts connections. The local port is the port on your local machine you wish to make it available as, and to which any client application running on your local machine would connect to.
+
+- ```oc port-forward <pod-name> :<remote-port>```: Forward connections between your local machine and an application running in OpenShift. The remote port is the port the application running in OpenShift accepts connections. As a local port to use is not specified, a random local port is used, with the port number being displayed. Any client application running on your local machine would connect to the randomly assigned port.
+
+## Transferring Files in and out of Containers
+
+In this course you learnt about oc commands you can use to transfer files to and from a running container, as well as how to set up live synchronization so changes are automatically copied from a local machine into a running container.
+
+You can find a summary of the key commands covered below. To see more information on each oc command, run it with the --help option.
+
+- ```oc rsync <pod-name>:/remote/dir/filename ./local/dir```: Copy a single file from the pod to the local directory.
+
+- ```oc rsync <pod-name>:/remote/dir ./local/dir```: Copy the directory from the pod to the local directory.
+
+- ```oc rsync <pod-name>:/remote/dir/. ./local/dir```: Copy the contents of the directory from the pod to the local directory.
+
+- ```oc rsync <pod-name>:/remote/dir ./local/dir --delete```: Copy the contents of the directory from the pod to the local directory. The --delete option ensures that the resulting directories will match exactly, with directories/files in the local directory which are not found in the pod being deleted.
+
+- ```oc rsync ./local/dir <pod-name>:/remote/dir --no-perms```: Copy the directory to the remote directory in the pod. The --no-perms option ensures that no attempt is made to transfer permissions, which can fail if remote directories are not owned by user container runs as.
+
+- ```oc rsync ./local/dir <pod-name>:/remote/dir --exclude=* --include=<filename> --no-perms```: Copy the single file to the remote directory in the pod. The --no-perms option ensures that no attempt is made to transfer permissions, which can fail if remote directories are not owned by user container runs as.
+
+- ```oc rsync ./local/dir <pod-name>:/remote/dir --no-perms --watch```: Copy the directory to the remote directory in the pod and then keep the remote directory syncrhonized with the local directory, with any changed files automatically being copied to the pod. The --no-perms option ensures that no attempt is made to transfer permissions, which can fail if remote directories are not owned by user container runs as. The --watch option is what enables the synchronization mechanism.
+
+- ```oc run dummy --image centos/httpd-24-centos7```: Run a dummy application pod which can be used to mount persistent volumes to facilitate copying files to a persistent volume.
+
+- ```oc set volume dc/dummy --add --name=tmp-mount --claim-name=<claim-name> --type pvc --claim-size=1G --mount-path /mnt```: Claim a persistent volume and mount it against a dummy application pod at the directory /mnt so files can be copied into the persistent volume using oc rsync.
+
+- ```oc set volume dc/dummy --add --name=tmp-mount --claim-name=<claim-name> --mount-path /mnt```: Mount an existing persistent volume against a dummy application pod at the directory /mnt so files can be copied into the persistent volume using oc rsync.
+
+- ```oc rsync ./local/dir <pod-name>:/remote/dir --strategy=tar```: Copy the directory to the remote directory in the pod. The --strategy=tar option indicates to use tar to copy the files rather than rsync.
