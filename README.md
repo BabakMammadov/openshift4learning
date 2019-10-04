@@ -8,6 +8,8 @@ Taken notes during learning OpenShift on https://learn.openshift.com
     - [Using the CLI to Manage Resource Objects](#using-the-cli-to-manage-resource-objects)
     - [Connecting to a Database Using Port Forwarding](#connecting-to-a-database-using-port-forwarding)
     - [Transferring Files in and out of Containers](#transferring-files-in-and-out-of-containers)
+- [Building Applications On OpenShift](#building-applications-on-openShift)
+- [Subsystems Components and Internals](#subsystems-components-and-internals)
 
 ## Foundations of OpenShift
 ## Getting Started with OpenShift for Developers
@@ -341,3 +343,13 @@ You can find a summary of the key commands covered below. To see more informatio
 - ```oc set volume dc/dummy --add --name=tmp-mount --claim-name=<claim-name> --mount-path /mnt```: Mount an existing persistent volume against a dummy application pod at the directory /mnt so files can be copied into the persistent volume using oc rsync.
 
 - ```oc rsync ./local/dir <pod-name>:/remote/dir --strategy=tar```: Copy the directory to the remote directory in the pod. The --strategy=tar option indicates to use tar to copy the files rather than rsync.
+
+## Building Applications On OpenShift
+Will be completed once other Scenarios done.
+
+## Subsystems Components and Internals
+### Linux Container Internals 2.0 - Lab 1: Introduction to Containers
+* Container Images: made up of underlying operating system components like libraries and programming languages
+* Container Registries: Fancy file servers that help users share container images
+* Contianer Hosts: Includes Podman (or Docker) runtime, Systemd, runc, and Libcontainer
+* Container Orchestration: Includes Kubernetes/OpenShift
